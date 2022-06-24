@@ -41,8 +41,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        // BlocProvider(create: ((context) => AppCubit()..changeThemeMode(fromShared: isDark))),
-
         BlocProvider(
             create: ((context) => AppCubit()
               ..createDatabase()
@@ -59,6 +57,7 @@ class MyApp extends StatelessWidget {
                     title: 'Todo App',
                     //!dark
                     darkTheme: ThemeData(
+                      
                       timePickerTheme:
                           TimePickerThemeData(backgroundColor: kDarkBG),
                       //bottom sheet

@@ -16,7 +16,7 @@ const ColorScheme kColorScheme = ColorScheme(
 const ColorScheme kColorDarkScheme = ColorScheme(
   primary: Colors.white,
   secondary: kSecondary,
-  surface: kSurfaceWhite,
+  surface: kDarkBG,
   background: kDarkBG,
   error: kErrorRed,
   onPrimary: kDarkBG,
@@ -28,7 +28,8 @@ const ColorScheme kColorDarkScheme = ColorScheme(
 );
 
 /// basic colors
-const kPrimary = Color.fromARGB(255, 36, 136, 246);
+const kPrimary = Color.fromARGB(255, 98, 106, 227);
+// const kPrimary = Color.fromARGB(255, 36, 136, 246);
 const kSecondary = Color.fromARGB(255, 98, 106, 227);
 
 const kTeal400 = Color(0xFF26A69A);
