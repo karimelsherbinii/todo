@@ -227,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       prefix: Icons.title,
                                       validate: (String? value) {
                                         if (value!.isEmpty) {
-                                          return 'Title must be not empty!!';
+                                          return 'Title must be not empty!';
                                         }
                                         return null;
                                       },
@@ -254,7 +254,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       },
                                       validate: (String? value) {
                                         if (value!.isEmpty) {
-                                          return 'Title must be not empty!!';
+                                          return 'Time must be not empty!';
                                         }
                                         return null;
                                       },
@@ -283,7 +283,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       },
                                       validate: (String? value) {
                                         if (value!.isEmpty) {
-                                          return 'Title must be not empty!!';
+                                          return 'Date must be not empty!';
                                         }
                                         return null;
                                       },

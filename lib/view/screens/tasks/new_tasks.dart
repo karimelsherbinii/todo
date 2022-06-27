@@ -40,6 +40,16 @@ class _NewTasksState extends State<NewTasks> {
     _refreshController.refreshCompleted();
   }
 
+  void _onLoading() async {
+    // monitor network fetch
+    await Future.delayed(const Duration(milliseconds: 1000));
+    // if failed,use loadFailed(),if no data return,use LoadNodata()
+    AppCubit.get(context).getDataFromDatabase(AppCubit.get(context).database);
+    if (mounted) AppCubit.get(context);
+
+    _refreshController.loadComplete();
+  }
+
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQuery = MediaQueryData();
