@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +9,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sizer/sizer.dart';
 import 'package:todo/buisness_logic/app/app_cubit.dart';
 import 'package:todo/helper/cache_helper.dart';
+import 'package:todo/translations/codegen_loader.g.dart';
 import 'package:todo/utils/app_route.dart';
 import 'package:todo/utils/colors.dart';
 import 'package:todo/utils/strings.dart';
@@ -17,13 +19,31 @@ import 'view/screens/home/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await CacheHelper.init();
   bool? isDark = CacheHelper.getDataFromSharedPreference(key: 'isDark');
+  var en = CacheHelper.getDataFromSharedPreference(
+    key: 'en',
+  );
+  var ar = CacheHelper.getDataFromSharedPreference(
+    key: 'ar',
+  );
+
   BlocOverrides.runZoned(
     () async {
-      runApp(MyApp(
-        appRouter: AppRouter(),
-        isDark: isDark,
+      runApp(EasyLocalization(
+        supportedLocales: [Locale('en'), Locale('ar')],
+
+        assetLoader: const CodegenLoader(),
+        path:
+            'assets/translations', // <-- change the path of the translation files
+        fallbackLocale: Locale(
+          'en',
+        ),
+        child: MyApp(
+          appRouter: AppRouter(),
+          isDark: isDark,
+        ),
       ));
     },
     blocObserver: MyBlocObserver(),
@@ -78,11 +98,15 @@ class MyApp extends StatelessWidget {
                         false, // Disable pull-up to load more functionality when Viewport is less than one screen
                     enableBallisticLoad: true,
                     child: MaterialApp(
-                      localizationsDelegates: [
-                        RefreshLocalizations.delegate,
-                        // GlobalWidgetsLocalizations.delegate,
-                        // GlobalMaterialLocalizations.delegate
-                      ],
+                      localizationsDelegates: context.localizationDelegates,
+                      supportedLocales: context.supportedLocales,
+                      locale: context.locale,
+
+                      // localizationsDelegates: [
+                      // RefreshLocalizations.delegate,
+                      // GlobalWidgetsLocalizations.delegate,
+                      // GlobalMaterialLocalizations.delegate
+                      // ],
                       debugShowCheckedModeBanner: false,
                       title: 'Todo App',
                       //!dark

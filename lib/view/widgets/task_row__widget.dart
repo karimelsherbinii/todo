@@ -33,6 +33,7 @@ class TaskRoWidget extends StatelessWidget {
     controller.fadeIn();
     AppCubit cubit = AppCubit.get(context);
     return Slidable(
+      
       // Specify a key if the Slidable is dismissible.
       key: ValueKey(model!['id'].toString()),
 

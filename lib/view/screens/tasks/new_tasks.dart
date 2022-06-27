@@ -5,6 +5,9 @@ import 'package:loading_indicator/loading_indicator.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sizer/sizer.dart' as sizer;
 import 'package:todo/buisness_logic/app/app_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:todo/translations/locale_keys.g.dart';
 
 import '../../../utils/colors.dart';
 import '../../widgets/task_details.dart';
@@ -96,9 +99,10 @@ class _NewTasksState extends State<NewTasks> {
               ),
               Center(
                 child: Text(
-                  'Tasks is empty!! please add some tasks.',
+                  LocaleKeys.tasks_is_empty_please_add_some_tasts.toString(),
                   style: GoogleFonts.tajawal(fontSize: 15.sp),
-                ),
+                  textAlign: TextAlign.center,
+                ).tr(),
               )
             ],
           ),
@@ -109,7 +113,11 @@ class _NewTasksState extends State<NewTasks> {
         controller: _refreshController,
         enablePullDown: true,
         enablePullUp: true,
-        header: const WaterDropHeader(),
+        header: WaterDropHeader(
+          // refresh: Text(LocaleKeys.refresh_completed.tr()),
+          // complete: Text(LocaleKeys.refresh_completed.tr()),
+          // idleIcon: CircularProgressIndicator(),
+        ),
         child: Padding(
           padding: EdgeInsets.all(8.sp),
           child: ListView.separated(

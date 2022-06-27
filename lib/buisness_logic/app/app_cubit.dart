@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:todo/helper/cache_helper.dart';
-
+import 'package:easy_localization/easy_localization.dart';
+import '../../translations/locale_keys.g.dart';
 import '../../view/screens/tasks/archives_tasks.dart';
 import '../../view/screens/tasks/done_tasks.dart';
 import '../../view/screens/tasks/new_tasks.dart';
@@ -29,9 +30,9 @@ class AppCubit extends Cubit<AppState> {
   ];
 //* titles of app
   List<String> titles = [
-    'New tasks',
-    'Done Tasks',
-    'Archives Tasks',
+    LocaleKeys.new_tasks_title.tr(),
+    LocaleKeys.done_tasks_title.tr(),
+    LocaleKeys.archived_tasks_title.tr(),
   ];
   List<Map> newTasks = [];
   List<Map> doneTasks = [];

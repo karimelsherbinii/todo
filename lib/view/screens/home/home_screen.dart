@@ -10,8 +10,12 @@ import 'package:sqflite/sqflite.dart';
 import 'package:todo/buisness_logic/app/app_cubit.dart';
 import 'package:todo/components/input_fields.dart';
 import 'package:todo/components/style_classes.dart';
+import 'package:todo/helper/cache_helper.dart';
+import 'package:todo/translations/locale_keys.g.dart';
 import 'package:todo/utils/colors.dart';
 import 'package:todo/view/screens/tasks/deleted_tesks.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../utils/constants.dart';
 import '../tasks/archives_tasks.dart';
@@ -106,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
               title: Text(
                 cubit.titles[cubit.currentIndex],
                 style: Theme.of(context).textTheme.headline6,
-              )),
+              ).tr()),
           drawer: Drawer(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -139,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: 4.w,
                       ),
                       Text(
-                        'Welcome',
+                        LocaleKeys.hi_text.tr(),
                         style: GoogleFonts.tajawal(fontSize: 20),
                       ),
                     ],
@@ -156,13 +160,52 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     child: ListTile(
                       title: Text(
-                        'Recent Deleted',
+                        LocaleKeys.trash.tr(),
                         style: Theme.of(context).textTheme.bodyText2,
                       ),
                       leading: Icon(
                         eva.EvaIcons.trash2,
                         color: Colors.black,
                       ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(13.sp),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          LocaleKeys.languages.tr(),
+                          style: GoogleFonts.tajawal(fontSize: 15),
+                        ),
+                        Row(
+                          // mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 2.h,
+                            ),
+                            TextButton(
+                                onPressed: () {
+                                  setState(() {
+                                    context.setLocale(Locale('en'));
+                                    CacheHelper.saveDataSharedPreference(
+                                        key: 'en', value: Locale('en'));
+                                  });
+                                  print(context.locale.toString());
+                                },
+                                child: const Text('English')),
+                            TextButton(
+                                onPressed: () {
+                                  setState(() {
+                                    context.setLocale(Locale('ar'));
+                                     CacheHelper.saveDataSharedPreference(
+                                        key: 'en', value: Locale('ar'));
+                                  });
+                                },
+                                child: const Text('العربية'))
+                          ],
+                        ),
+                      ],
                     ),
                   )
                 ],
@@ -223,11 +266,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                     defaultTextFormField(
                                       controller: titleController,
                                       type: TextInputType.text,
-                                      lable: 'Task title',
+                                      lable: LocaleKeys.task_title_field.tr(),
                                       prefix: Icons.title,
                                       validate: (String? value) {
                                         if (value!.isEmpty) {
-                                          return 'Title must be not empty!';
+                                          return LocaleKeys.task_title_error
+                                              .tr();
                                         }
                                         return null;
                                       },
@@ -236,7 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     defaultTextFormField(
                                       controller: timeController,
                                       type: TextInputType.text,
-                                      lable: 'Task time',
+                                      lable: LocaleKeys.task_time_field.tr(),
                                       prefix: eva.EvaIcons.clock,
                                       onTap: () {
                                         timeController.text.isEmpty
@@ -250,11 +294,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 print(value.format(context));
                                               })
                                             : null;
-                                        print('tapped ');
                                       },
                                       validate: (String? value) {
                                         if (value!.isEmpty) {
-                                          return 'Time must be not empty!';
+                                          return LocaleKeys.task_time_error
+                                              .tr();
                                         }
                                         return null;
                                       },
@@ -263,7 +307,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     defaultTextFormField(
                                       controller: dateController,
                                       type: TextInputType.datetime,
-                                      lable: 'Task date',
+                                      lable: LocaleKeys.task_date_field.tr(),
                                       prefix: Icons.date_range,
                                       onTap: () {
                                         dateController.text.isEmpty
@@ -279,11 +323,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         .format(value!);
                                               })
                                             : null;
-                                        print('tapped ');
                                       },
                                       validate: (String? value) {
                                         if (value!.isEmpty) {
-                                          return 'Date must be not empty!';
+                                          return LocaleKeys.task_date_error
+                                              .tr();
                                         }
                                         return null;
                                       },
@@ -328,22 +372,23 @@ class _HomeScreenState extends State<HomeScreen> {
               // }
             },
             items: [
-              const BottomNavigationBarItem(
+              BottomNavigationBarItem(
                 icon: Icon(
                   eva.EvaIcons.home,
                   // color: kDarkBG,
                 ),
-                label: 'Home',
+                label: LocaleKeys.home_title.tr(),
               ),
-              const BottomNavigationBarItem(
-                  icon: Icon(Icons.done), label: 'Done Tasks'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.done),
+                  label: LocaleKeys.done_tasks_title.tr()),
               BottomNavigationBarItem(
                   icon: Icon(
                     cubit.currentIndex == 2
                         ? eva.EvaIcons.archive
                         : eva.EvaIcons.archiveOutline,
                   ),
-                  label: 'Archived Tasks'),
+                  label: LocaleKeys.archived_tasks_title.tr()),
             ],
           ),
         );

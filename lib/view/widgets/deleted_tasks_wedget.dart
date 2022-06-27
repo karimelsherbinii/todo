@@ -4,8 +4,9 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'package:todo/buisness_logic/app/app_cubit.dart';
+import 'package:todo/translations/locale_keys.g.dart';
 import 'package:todo/utils/colors.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart' as eva;
 
 class DeletedTaskWidget extends StatelessWidget {
@@ -43,7 +44,7 @@ class DeletedTaskWidget extends StatelessWidget {
             backgroundColor: const Color(0xFFFE4A49),
             foregroundColor: Colors.white,
             icon: Icons.delete,
-            label: 'Delete !!!',
+            label: LocaleKeys.remove_task.tr(),
           ),
           // SlidableAction(
           //   onPressed: ((context) {
@@ -82,7 +83,7 @@ class DeletedTaskWidget extends StatelessWidget {
             backgroundColor: Color(0xFF21B7CA),
             foregroundColor: Colors.white,
             icon: Icons.delete,
-            label: 'Recover',
+            label: LocaleKeys.recover_to_done.tr(),
           ),
         ],
       ),
@@ -139,7 +140,7 @@ class DeletedTaskWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'Back to Tasks',
+                      LocaleKeys.recover_to_done.tr(),
                       style: Theme.of(context).textTheme.overline,
                     ),
                     SizedBox(

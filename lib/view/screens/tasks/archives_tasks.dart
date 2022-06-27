@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sizer/sizer.dart';
 import 'package:todo/buisness_logic/app/app_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:todo/translations/locale_keys.g.dart';
 
 import '../../widgets/task_details.dart';
 import '../../widgets/task_row__widget.dart';
@@ -59,10 +61,10 @@ class _ArchivedTasksState extends State<ArchivedTasks> {
                           Align(
                             alignment: Alignment.center,
                             child: Text(
-                              'Empty',
+                              LocaleKeys.empty,
                               style: GoogleFonts.tajawal(
                                   fontSize: 40.sp, color: Colors.grey[200]),
-                            ),
+                            ).tr(),
                           )
                         ],
                       )
@@ -70,17 +72,18 @@ class _ArchivedTasksState extends State<ArchivedTasks> {
                         physics: BouncingScrollPhysics(),
                         itemCount: cubit.archivedTasks.length,
                         itemBuilder: ((context, index) => InkWell(
-                           onTap: (){
-                              Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => TaskDetails(model: cubit.archivedTasks[index])));
-                          },
-                          child: TaskRoWidget(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => TaskDetails(
+                                        model: cubit.archivedTasks[index])));
+                              },
+                              child: TaskRoWidget(
                                 cubit.archivedTasks[index],
                                 timeController: cubit.timeController,
                                 titleController: cubit.titleController,
                                 dateController: cubit.dateController,
                               ),
-                        )),
+                            )),
                         separatorBuilder: (context, index) => Container(
                           height: 0.1.h,
                           width: double.infinity,

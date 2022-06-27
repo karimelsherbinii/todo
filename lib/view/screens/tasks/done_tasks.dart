@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sizer/sizer.dart';
 import 'package:todo/buisness_logic/app/app_cubit.dart';
+import 'package:todo/translations/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../widgets/task_details.dart';
 import '../../widgets/task_row__widget.dart';
@@ -59,10 +61,10 @@ class _DoneTasksState extends State<DoneTasks> {
                           Align(
                             alignment: Alignment.center,
                             child: Text(
-                              'Empty',
+                              LocaleKeys.empty,
                               style: GoogleFonts.tajawal(
                                   fontSize: 40.sp, color: Colors.grey[200]),
-                            ),
+                            ).tr(),
                           )
                         ],
                       )

@@ -4,7 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 import 'package:todo/components/input_fields.dart';
-
+import 'package:todo/translations/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../../buisness_logic/app/app_cubit.dart';
 
 class TaskDetails extends StatelessWidget {
@@ -48,7 +49,7 @@ class TaskDetails extends StatelessWidget {
           child: Icon(eva.EvaIcons.arrowIosBack),
         ),
         title: Text(
-          'Edit you\'r task',
+          LocaleKeys.edit_task.tr(),
           style: Theme.of(context).textTheme.headline6,
         ),
       ),
@@ -68,7 +69,7 @@ class TaskDetails extends StatelessWidget {
                 },
                 validate: (String? value) {
                   if (value!.isEmpty) {
-                    return 'Title must be not empty!!';
+                    return LocaleKeys.task_title_error.tr();
                   }
                   return null;
                 },
@@ -95,7 +96,7 @@ class TaskDetails extends StatelessWidget {
                 },
                 validate: (String? value) {
                   if (value!.isEmpty) {
-                    return 'Title must be not empty!!';
+                    return LocaleKeys.task_time_error.tr();
                   }
                   return null;
                 },
@@ -125,14 +126,14 @@ class TaskDetails extends StatelessWidget {
                 },
                 validate: (String? value) {
                   if (value!.isEmpty) {
-                    return 'Title must be not empty!!';
+                    return LocaleKeys.task_date_error.tr();
                   }
                   return null;
                 },
               ),
               CustomTextField1(
                 mycontroller: cubit.descriptionController,
-                text: 'Enter you\'r task description ...',
+                text: LocaleKeys.description.tr(),
                 onSubmit: (value) {
                   cubit.updateDescriptionDatabase(
                       id: model['id'],

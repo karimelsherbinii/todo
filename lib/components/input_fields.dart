@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'package:todo/components/style_classes.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import '../utils/colors.dart';
 import 'general_model.dart';
 
